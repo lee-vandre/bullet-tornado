@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cyokba1olkmhr"]
+
+[ext_resource type="Script" path="res://character_body_3d.gd" id="1_5agki"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_d8wrv"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_6yi8n"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bkfun"]
+size = Vector3(4.84955, 1, 9.22845)
+
+[node name="player" type="CharacterBody3D"]
+collision_mask = 3
+script = ExtResource("1_5agki")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_d8wrv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_6yi8n")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0174866, 0, -0.484467)
+shape = SubResource("BoxShape3D_bkfun")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
